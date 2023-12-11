@@ -7,11 +7,15 @@ const Home = () => {
   const [appointments, setAppointments] = useState(appointmentData);
   const handleAdd = (newAppointment) => {
     setAppointments([...appointments, newAppointment]);
+    localStorage.setItem(
+      "list".JSON.stringify([...appointments, newAppointment])
+    );
   };
 
   const handleDelete = (id) => {
     const filteredList = appointments.filter((item) => item.id !== id);
     setAppointments(filteredList);
+    localStorage.setItem("list".JSON.stringify(filteredList));
   };
 
   const handleDoubleClick = (id) => {
@@ -19,6 +23,7 @@ const Home = () => {
       item.id === id ? { ...item, consulted: !item.consulted } : item
     );
     setAppointments(updateList);
+    localStorage.setItem("list".JSON.stringify(updateList));
   };
   return (
     <main className="text-center mt-2">
